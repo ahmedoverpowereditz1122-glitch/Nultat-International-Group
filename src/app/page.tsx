@@ -11,6 +11,8 @@ import Careers from './components/Careers'
 import Contact from './components/Contact'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import Chatbot from './components/Chatbot'
+import WhatsAppButton from './components/Whatsapp'
 
 export default function Home() {
   return (
@@ -20,7 +22,7 @@ export default function Home() {
       transition={{ duration: 0.5 }}
       className="overflow-hidden"
     >
-      <Navbar/>
+      <Navbar />
       <Hero />
       <About />
       <Services />
@@ -28,7 +30,11 @@ export default function Home() {
       <Clients />
       <Careers />
       <Contact />
-      <Footer/>
+      <Footer />
+
+      {/* Floating widgets */}
+      <WhatsAppButton />
+      <Chatbot />
     </motion.main>
   )
 }
