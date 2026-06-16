@@ -263,7 +263,6 @@ export default function CustomerServicesPage() {
               </h2>
             </motion.div>
 
-            {/* KEY FIX: removed span logic, uniform grid with CSS classes */}
             <div className="cs-grid">
               {services.map((svc, i) => (
                 <motion.div
@@ -473,7 +472,6 @@ export default function CustomerServicesPage() {
         @media (max-width: 560px) {
           .cs-grid {
             grid-template-columns: 1fr;
-            gap: 2px;
           }
           .cs-card {
             grid-column: span 1 !important;
