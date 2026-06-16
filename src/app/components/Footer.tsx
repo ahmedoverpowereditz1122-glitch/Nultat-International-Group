@@ -1,280 +1,358 @@
 'use client'
 
+import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
-import { FaLinkedin, FaFacebook, FaPhone, FaMapMarkerAlt } from 'react-icons/fa'
-import { MdEmail } from 'react-icons/md'
-import { FaUpwork } from 'react-icons/fa6'
-import SafeStyle from './SafeStyle'
+import Image from 'next/image'
+import { Menu, X, ChevronDown } from 'lucide-react'
 
-const quickLinks = [
-  { name: 'About Us', href: '#about' },
-  { name: 'Services', href: '#services' },
-  { name: 'Our Team', href: '#team' },
-  { name: 'Careers', href: '#careers' },
-  { name: 'Contact', href: '#contact' },
+const navLinks = [
+  { name: 'Home', href: '/' },
+  { name: 'About', href: '/#about' },
+  { name: 'Team', href: '/#team' },
+  { name: 'Careers', href: '/#careers' },
+  { name: 'Contact', href: '/#contact' },
 ]
 
-const services = [
+const servicesList = [
   { name: 'Customer Services', href: '/services/customer-services' },
   { name: 'Sales & Marketing', href: '/services/sales-marketing' },
+  { name: 'Mobile & Web Development', href: '/services/web-development' },
   { name: 'BPO Services', href: '/services/bpo-services' },
-  { name: 'Web Development', href: '/services/web-development' },
+  { name: 'Business Management', href: '/services/business-management' },
   { name: 'Real Estate', href: '/services/real-estate' },
 ]
 
-const socials = [
-  { icon: FaLinkedin, href: '#', label: 'LinkedIn' },
-  { icon: FaFacebook, href: '#', label: 'Facebook' },
-  { icon: FaUpwork, href: '#', label: 'Upwork' },
-]
+interface NavbarProps {
+  isRealEstateActive?: boolean
+}
 
-export default function Footer() {
+export default function Navbar({ isRealEstateActive = false }: NavbarProps) {
+  const [isOpen, setIsOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const [servicesOpen, setServicesOpen] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50)
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  const logoImage = isRealEstateActive ? '/real.png' : '/logo2.png'
+
   return (
-    <footer style={{
-      backgroundColor: '#0a0f28',
-      color: '#ffffff',
-      fontFamily: "'Inter', sans-serif",
-    }}>
-      {/* Top accent line */}
+    <motion.nav
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5 }}
+      style={{
+        position: 'fixed',
+        top: 0,
+        width: '100%',
+        zIndex: 50,
+        transition: 'all 0.3s ease',
+        backgroundColor: scrolled ? 'rgba(10, 15, 40, 0.97)' : 'rgba(10, 15, 40, 1)',
+        boxShadow: scrolled ? '0 4px 32px rgba(0,0,0,0.4)' : 'none',
+        borderBottom: scrolled ? '1px solid rgba(30,64,175,0.3)' : '1px solid transparent',
+      }}
+    >
+      {/* Top blue accent line */}
       <div style={{ height: '3px', background: 'linear-gradient(to right, #1e3a8a, #1e40af, #3b82f6, #1e40af, #1e3a8a)' }} />
 
-      {/* Main content */}
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '72px 32px 0' }}>
-        <div
-          style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '2px', backgroundColor: 'rgba(30,64,175,0.15)', marginBottom: '2px' }}
-          className="footer-grid"
-        >
-          {/* Brand column */}
-          <div style={{ backgroundColor: '#0a0f28', padding: '0 48px 48px 0' }} className="footer-brand">
-            <div style={{ marginBottom: '20px' }}>
-              <div style={{
-                fontSize: '26px',
-                fontWeight: 800,
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 32px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '72px' }}>
+
+          {/* Logo */}
+          <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none', flexShrink: 0 }}>
+            <div style={{ position: 'relative', height: '48px', width: '48px' }}>
+              <Image
+                src={logoImage}
+                alt="Nultat International Group"
+                fill
+                style={{ objectFit: 'contain' }}
+                priority
+              />
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <span style={{
                 color: '#ffffff',
-                letterSpacing: '-0.03em',
-                lineHeight: 1,
-                marginBottom: '4px',
+                fontWeight: 800,
+                fontSize: '22px',
+                letterSpacing: '-0.02em',
+                lineHeight: 1.1,
               }}>
-                Nultat
-              </div>
-              <div style={{
-                fontSize: '10px',
-                fontWeight: 700,
-                letterSpacing: '0.2em',
-                textTransform: 'uppercase',
+                {isRealEstateActive ? 'Estate - 27' : 'Nultat'}
+              </span>
+              <span style={{ fontSize: 0, lineHeight: 0 }}>{'\u00A0'}</span>
+              <span style={{
                 color: '#93c5fd',
+                fontSize: '10px',
+                letterSpacing: '0.18em',
+                textTransform: 'uppercase',
+                fontWeight: 600,
+                lineHeight: 1.2,
               }}>
-                International Group
-              </div>
+                {isRealEstateActive ? 'Real Estate' : 'International Group'}
+              </span>
             </div>
+          </Link>
 
-            <div style={{ width: '40px', height: '2px', backgroundColor: '#1e40af', marginBottom: '20px' }} />
-
-            <p style={{
-              fontSize: '14px',
-              color: '#64748b',
-              lineHeight: 1.8,
-              maxWidth: '280px',
-              marginBottom: '32px',
-            }}>
-              Adding value in services through professional excellence, motivated teams, and around-the-clock client commitment.
-            </p>
-
-            {/* Socials */}
-            <div style={{ display: 'flex', gap: '8px' }}>
-              {socials.map(({ icon: Icon, href, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  aria-label={label}
-                  style={{
-                    width: '38px',
-                    height: '38px',
-                    border: '1px solid rgba(30,64,175,0.4)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#64748b',
-                    textDecoration: 'none',
-                    transition: 'all 0.2s',
-                  }}
-                  onMouseEnter={e => {
-                    e.currentTarget.style.backgroundColor = '#1e40af'
-                    e.currentTarget.style.borderColor = '#1e40af'
-                    e.currentTarget.style.color = '#ffffff'
-                  }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.backgroundColor = 'transparent'
-                    e.currentTarget.style.borderColor = 'rgba(30,64,175,0.4)'
-                    e.currentTarget.style.color = '#64748b'
-                  }}
+          {/* Desktop Nav */}
+          <div className="hidden md:flex" style={{ alignItems: 'center', gap: '32px' }}>
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                style={{ textDecoration: 'none' }}
+                className="nav-link"
+              >
+                <span style={{
+                  color: '#e2e8f0',
+                  fontWeight: 500,
+                  fontSize: '14px',
+                  letterSpacing: '0.04em',
+                  textTransform: 'uppercase',
+                  transition: 'color 0.2s',
+                  position: 'relative',
+                }}
+                  onMouseEnter={e => (e.currentTarget.style.color = '#60a5fa')}
+                  onMouseLeave={e => (e.currentTarget.style.color = '#e2e8f0')}
                 >
-                  <Icon size={15} />
-                </a>
-              ))}
-            </div>
-          </div>
+                  {link.name}
+                </span>
+              </Link>
+            ))}
 
-          {/* Quick Links */}
-          <div style={{ backgroundColor: '#0a0f28', padding: '0 0 48px 40px', borderLeft: '1px solid rgba(30,64,175,0.15)' }} className="footer-col">
-            <div style={{
-              fontSize: '10px',
-              fontWeight: 700,
-              letterSpacing: '0.2em',
-              textTransform: 'uppercase',
-              color: '#1e40af',
-              marginBottom: '24px',
-            }}>
-              Quick Links
-            </div>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              {quickLinks.map(link => (
-                <li key={link.name} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <span style={{ width: '12px', height: '1px', backgroundColor: '#1e40af', display: 'inline-block', flexShrink: 0 }} />
-                  <Link
-                    href={link.href}
+            {/* Services Dropdown */}
+            <div
+              style={{ position: 'relative' }}
+              onMouseEnter={() => setServicesOpen(true)}
+              onMouseLeave={() => setServicesOpen(false)}
+            >
+              <button
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '4px',
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  color: servicesOpen ? '#60a5fa' : '#e2e8f0',
+                  fontWeight: 500,
+                  fontSize: '14px',
+                  letterSpacing: '0.04em',
+                  textTransform: 'uppercase',
+                  transition: 'color 0.2s',
+                  padding: 0,
+                }}
+              >
+                Services
+                <ChevronDown
+                  size={14}
+                  style={{
+                    transition: 'transform 0.25s',
+                    transform: servicesOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                  }}
+                />
+              </button>
+
+              <AnimatePresence>
+                {servicesOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 8 }}
+                    transition={{ duration: 0.18 }}
                     style={{
-                      fontSize: '14px',
-                      color: '#64748b',
-                      textDecoration: 'none',
-                      transition: 'color 0.2s',
-                      fontWeight: 500,
+                      position: 'absolute',
+                      top: 'calc(100% + 16px)',
+                      left: '50%',
+                      transform: 'translateX(-50%)',
+                      width: '260px',
+                      backgroundColor: '#0a0f28',
+                      border: '1px solid rgba(30,64,175,0.4)',
+                      borderTop: '2px solid #1e40af',
+                      padding: '8px 0',
+                      zIndex: 99,
+                      boxShadow: '0 20px 40px rgba(0,0,0,0.5)',
                     }}
-                    onMouseEnter={e => (e.currentTarget.style.color = '#93c5fd')}
-                    onMouseLeave={e => (e.currentTarget.style.color = '#64748b')}
                   >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Services */}
-          <div style={{ backgroundColor: '#0a0f28', padding: '0 0 48px 40px', borderLeft: '1px solid rgba(30,64,175,0.15)' }} className="footer-col">
-            <div style={{
-              fontSize: '10px',
-              fontWeight: 700,
-              letterSpacing: '0.2em',
-              textTransform: 'uppercase',
-              color: '#1e40af',
-              marginBottom: '24px',
-            }}>
-              Services
+                    {servicesList.map((service) => (
+                      <Link
+                        key={service.name}
+                        href={service.href}
+                        onClick={() => setServicesOpen(false)}
+                        style={{ textDecoration: 'none' }}
+                      >
+                        <div
+                          style={{
+                            padding: '10px 20px',
+                            fontSize: '13px',
+                            color: '#94a3b8',
+                            fontWeight: 500,
+                            transition: 'all 0.15s',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '10px',
+                          }}
+                          onMouseEnter={e => {
+                            e.currentTarget.style.backgroundColor = 'rgba(30,64,175,0.15)'
+                            e.currentTarget.style.color = '#60a5fa'
+                            e.currentTarget.style.paddingLeft = '24px'
+                          }}
+                          onMouseLeave={e => {
+                            e.currentTarget.style.backgroundColor = 'transparent'
+                            e.currentTarget.style.color = '#94a3b8'
+                            e.currentTarget.style.paddingLeft = '20px'
+                          }}
+                        >
+                          <span style={{ width: '12px', height: '1px', backgroundColor: '#1e40af', flexShrink: 0, display: 'inline-block' }} />
+                          {service.name}
+                        </div>
+                      </Link>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              {services.map(s => (
-                <li key={s.name} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <span style={{ width: '12px', height: '1px', backgroundColor: '#1e40af', display: 'inline-block', flexShrink: 0 }} />
-                  <Link
-                    href={s.href}
-                    style={{
-                      fontSize: '14px',
-                      color: '#64748b',
-                      textDecoration: 'none',
-                      transition: 'color 0.2s',
-                      fontWeight: 500,
-                    }}
-                    onMouseEnter={e => (e.currentTarget.style.color = '#93c5fd')}
-                    onMouseLeave={e => (e.currentTarget.style.color = '#64748b')}
-                  >
-                    {s.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+
+            {/* CTA */}
+            <Link
+              href="mailto:example@gmail.com"
+              style={{
+                backgroundColor: '#1e40af',
+                color: '#ffffff',
+                padding: '10px 24px',
+                fontWeight: 700,
+                fontSize: '13px',
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                textDecoration: 'none',
+                border: '2px solid #1e40af',
+                transition: 'background-color 0.2s',
+                display: 'inline-block',
+                whiteSpace: 'nowrap',
+              }}
+              onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#1e3a8a')}
+              onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#1e40af')}
+            >
+              Contact Us
+            </Link>
           </div>
 
-          {/* Contact */}
-          <div style={{ backgroundColor: '#0a0f28', padding: '0 0 48px 40px', borderLeft: '1px solid rgba(30,64,175,0.15)' }} className="footer-col">
-            <div style={{
-              fontSize: '10px',
-              fontWeight: 700,
-              letterSpacing: '0.2em',
-              textTransform: 'uppercase',
-              color: '#1e40af',
-              marginBottom: '24px',
-            }}>
-              Contact
-            </div>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              <li>
-                <a href="tel:00923306887888" style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', textDecoration: 'none' }}>
-                  <FaPhone size={13} style={{ color: '#1e40af', marginTop: '3px', flexShrink: 0 }} />
-                  <span style={{ fontSize: '13px', color: '#64748b', lineHeight: 1.5 }}>0092-330-688 7888</span>
-                </a>
-              </li>
-              <li>
-                <a href="mailto:example@gmail.com" style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', textDecoration: 'none' }}>
-                  <MdEmail size={14} style={{ color: '#1e40af', marginTop: '2px', flexShrink: 0 }} />
-                  <span style={{ fontSize: '13px', color: '#64748b', lineHeight: 1.5 }}>example@gmail.com</span>
-                </a>
-              </li>
-              <li>
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
-                  <FaMapMarkerAlt size={13} style={{ color: '#1e40af', marginTop: '3px', flexShrink: 0 }} />
-                  <span style={{ fontSize: '13px', color: '#64748b', lineHeight: 1.6 }}>
-                    AliHasnain Plaza, 3rd Floor,<br />Office #303, Ghouritown Phase 5,<br />Islamabad, Pakistan
-                  </span>
-                </div>
-              </li>
-              <li style={{ paddingTop: '4px' }}>
-                <div style={{
-                  borderLeft: '2px solid #1e40af',
-                  paddingLeft: '12px',
-                }}>
-                  <div style={{ fontSize: '11px', fontWeight: 600, color: '#93c5fd', marginBottom: '2px' }}>Working Hours</div>
-                  <div style={{ fontSize: '13px', color: '#64748b' }}>Mon – Fri: 3pm – 2am</div>
-                  <div style={{ fontSize: '13px', color: '#475569' }}>Sat – Sun: Closed</div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        {/* Bottom bar */}
-        <div style={{
-          borderTop: '1px solid rgba(30,64,175,0.2)',
-          padding: '24px 0',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          flexWrap: 'wrap',
-          gap: '12px',
-        }}>
-          <p style={{ fontSize: '13px', color: '#475569', margin: 0 }}>
-            &copy; {new Date().getFullYear()} Nultat International Group. All rights reserved.
-          </p>
-          <p style={{ fontSize: '12px', color: '#334155', margin: 0, letterSpacing: '0.05em' }}>
-            Islamabad, Pakistan
-          </p>
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden"
+            style={{
+              background: 'none',
+              border: 'none',
+              color: '#ffffff',
+              cursor: 'pointer',
+              padding: '4px',
+            }}
+          >
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
       </div>
 
-      <SafeStyle>
-        {`
-        @media (max-width: 1024px) {
-            .footer-grid {
-                grid-template-columns: 1fr 1fr !important;
-                }
-                .footer-brand {
-                    padding-right: 0 !important;
-                    padding-bottom: 40px !important;
-                    }
-                    }
-                    @media (max-width: 600px) {
-                        .footer-grid {
-                            grid-template-columns: 1fr !important;
-          }
-          .footer-col {
-            padding-left: 0 !important;
-            border-left: none !important;
-            border-top: 1px solid rgba(30,64,175,0.15) !important;
-            padding-top: 32px !important;
-            }
-            }
-            `}
-            </SafeStyle>
-    </footer>
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            style={{
+              backgroundColor: '#0a0f28',
+              borderTop: '1px solid rgba(30,64,175,0.3)',
+              overflow: 'hidden',
+            }}
+            className="md:hidden"
+          >
+            <div style={{ padding: '16px 24px 24px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setIsOpen(false)}
+                  style={{ textDecoration: 'none' }}
+                >
+                  <div style={{
+                    padding: '12px 0',
+                    color: '#e2e8f0',
+                    fontWeight: 500,
+                    fontSize: '14px',
+                    letterSpacing: '0.08em',
+                    textTransform: 'uppercase',
+                    borderBottom: '1px solid rgba(30,64,175,0.15)',
+                  }}>
+                    {link.name}
+                  </div>
+                </Link>
+              ))}
+
+              {/* Services mobile */}
+              <div style={{ padding: '12px 0', borderBottom: '1px solid rgba(30,64,175,0.15)' }}>
+                <div style={{
+                  color: '#e2e8f0',
+                  fontWeight: 500,
+                  fontSize: '14px',
+                  letterSpacing: '0.08em',
+                  textTransform: 'uppercase',
+                  marginBottom: '10px',
+                }}>
+                  Services
+                </div>
+                <div style={{ paddingLeft: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  {servicesList.map((service) => (
+                    <Link
+                      key={service.name}
+                      href={service.href}
+                      onClick={() => setIsOpen(false)}
+                      style={{ textDecoration: 'none' }}
+                    >
+                      <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '10px',
+                        color: '#93c5fd',
+                        fontSize: '13px',
+                        fontWeight: 500,
+                      }}>
+                        <span style={{ width: '12px', height: '1px', backgroundColor: '#1e40af', display: 'inline-block', flexShrink: 0 }} />
+                        {service.name}
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              <Link
+                href="mailto:example@gmail.com"
+                onClick={() => setIsOpen(false)}
+                style={{
+                  backgroundColor: '#1e40af',
+                  color: '#ffffff',
+                  padding: '12px 24px',
+                  fontWeight: 700,
+                  fontSize: '13px',
+                  letterSpacing: '0.08em',
+                  textTransform: 'uppercase',
+                  textDecoration: 'none',
+                  display: 'block',
+                  textAlign: 'center',
+                  marginTop: '12px',
+                  border: '2px solid #1e40af',
+                }}
+              >
+                Contact Us
+              </Link>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.nav>
   )
 }
