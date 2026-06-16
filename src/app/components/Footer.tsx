@@ -24,7 +24,7 @@ const services = [
 
 const socials = [
   { icon: FaLinkedin, href: '#', label: 'LinkedIn' },
-  { icon: FaFacebook, href: '#', label: 'Facebook' },
+  { icon: FaFacebook, href: 'https://www.facebook.com/Nultat.Intl/', label: 'Facebook' },
   { icon: FaUpwork, href: '#', label: 'Upwork' },
 ]
 
