@@ -14,8 +14,8 @@ const teamMembers = [
   },
   {
     name: 'Faraz Khattak',
-    position: 'Manager Administration',
-    image: '/images/team/faraz.jpg',
+    position: 'Director Operation',
+    image: '/faraz.JPG',
     bio: 'Expert in operational management and team leadership with a proven track record across global clients.',
     initials: 'FK',
   },
