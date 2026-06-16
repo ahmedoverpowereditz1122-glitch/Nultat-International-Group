@@ -15,7 +15,7 @@ const contactItems = [
   {
     icon: Mail,
     label: 'Email Us',
-    lines: ['info@nullatinternational.com'],
+    lines: ['info@nultatinternationalgroup.com'],
     sub: 'We reply within 24 hours',
     href: 'mailto:info@nultatinternationalgroup.com',
   },
