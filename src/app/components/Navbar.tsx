@@ -83,6 +83,7 @@ export default function Navbar({ isRealEstateActive = false }: NavbarProps) {
               }}>
                 {isRealEstateActive ? 'Estate - 27' : 'Nultat'}
               </span>
+              {'\u00A0'}
               <span style={{
                 color: '#93c5fd',
                 fontSize: '10px',
