@@ -217,7 +217,7 @@ export default function BusinessManagementPage() {
                 View Services <ArrowRight size={14} />
               </Link>
               <Link
-                href="mailto:example@gmail.com"
+                href="mailto:info@nultatinternationalgroup.com"
                 style={{
                   display: 'inline-flex', alignItems: 'center', gap: '8px',
                   backgroundColor: 'transparent', color: '#ffffff',
@@ -333,7 +333,7 @@ export default function BusinessManagementPage() {
                   and build high-performing organizations through proven management expertise.
                 </p>
                 <Link
-                  href="mailto:example@gmail.com"
+                  href="mailto:info@nultatinternationalgroup.com"
                   style={{
                     display: 'inline-flex', alignItems: 'center', gap: '8px',
                     backgroundColor: '#1e40af', color: '#ffffff',
@@ -389,7 +389,7 @@ export default function BusinessManagementPage() {
               </div>
               <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
                 <Link
-                  href="mailto:example@gmail.com"
+                  href="mailto:info@nultatinternationalgroup.com"
                   style={{
                     display: 'inline-flex', alignItems: 'center', gap: '8px',
                     backgroundColor: '#1e40af', color: '#ffffff',
