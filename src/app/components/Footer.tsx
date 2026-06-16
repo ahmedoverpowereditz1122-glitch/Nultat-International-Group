@@ -23,9 +23,9 @@ const services = [
 ]
 
 const socials = [
-  { icon: FaLinkedin, href: '#', label: 'LinkedIn' },
+  { icon: FaLinkedin, href: 'https://pk.linkedin.com/company/nultat-international', label: 'LinkedIn' },
   { icon: FaFacebook, href: 'https://www.facebook.com/Nultat.Intl/', label: 'Facebook' },
-  { icon: FaUpwork, href: '#', label: 'Upwork' },
+  { icon: FaUpwork, href: 'https://www.upwork.com/agencies/1088864686447349760/', label: 'Upwork' },
 ]
 
 export default function Footer() {
