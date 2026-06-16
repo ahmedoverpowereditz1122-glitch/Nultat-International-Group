@@ -9,6 +9,7 @@ import {
   Phone,
   Briefcase,
   Building2,
+  Brain,
   ArrowRight
 } from 'lucide-react'
 import SafeStyle from './SafeStyle'
