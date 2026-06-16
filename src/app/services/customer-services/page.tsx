@@ -264,45 +264,49 @@ export default function CustomerServicesPage() {
             </motion.div>
 
             <div className="cs-grid">
-              {services.map((svc, i) => (
-                <motion.div
-                  key={svc.title}
-                  className="cs-card"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.05 }}
-                >
-                  <div
-                    className="cs-card-inner"
-                    onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#eff6ff')}
-                    onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#ffffff')}
+              {services.map((svc, i) => {
+                // Check if this is the last item (index 12)
+                const isLast = i === services.length - 1
+                return (
+                  <motion.div
+                    key={svc.title}
+                    className={`cs-card ${isLast ? 'cs-card-full' : ''}`}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: i * 0.05 }}
                   >
-                    <div style={{
-                      width: '48px', height: '48px', backgroundColor: '#dbeafe',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      marginBottom: '20px', flexShrink: 0,
-                    }}>
-                      <svc.icon size={20} style={{ color: '#1e40af' }} />
+                    <div
+                      className="cs-card-inner"
+                      onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#eff6ff')}
+                      onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#ffffff')}
+                    >
+                      <div style={{
+                        width: '48px', height: '48px', backgroundColor: '#dbeafe',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        marginBottom: '20px', flexShrink: 0,
+                      }}>
+                        <svc.icon size={20} style={{ color: '#1e40af' }} />
+                      </div>
+                      <div style={{
+                        fontSize: '10px', fontWeight: 700, letterSpacing: '0.16em',
+                        textTransform: 'uppercase', color: '#93c5fd', marginBottom: '8px',
+                      }}>
+                        {String(i + 1).padStart(2, '0')}
+                      </div>
+                      <h3 style={{
+                        fontSize: '16px', fontWeight: 700, color: '#1e3a8a',
+                        letterSpacing: '-0.01em', lineHeight: 1.25, marginBottom: '10px',
+                      }}>
+                        {svc.title}
+                      </h3>
+                      <p style={{ fontSize: '13.5px', color: '#64748b', lineHeight: 1.75, margin: 0 }}>
+                        {svc.description}
+                      </p>
                     </div>
-                    <div style={{
-                      fontSize: '10px', fontWeight: 700, letterSpacing: '0.16em',
-                      textTransform: 'uppercase', color: '#93c5fd', marginBottom: '8px',
-                    }}>
-                      {String(i + 1).padStart(2, '0')}
-                    </div>
-                    <h3 style={{
-                      fontSize: '16px', fontWeight: 700, color: '#1e3a8a',
-                      letterSpacing: '-0.01em', lineHeight: 1.25, marginBottom: '10px',
-                    }}>
-                      {svc.title}
-                    </h3>
-                    <p style={{ fontSize: '13.5px', color: '#64748b', lineHeight: 1.75, margin: 0 }}>
-                      {svc.description}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
+                  </motion.div>
+                )
+              })}
             </div>
           </div>
         </section>
@@ -425,6 +429,9 @@ export default function CustomerServicesPage() {
         .cs-card {
           background-color: #ffffff;
         }
+        .cs-card-full {
+          grid-column: span 3;
+        }
         .cs-card-inner {
           padding: 32px 28px;
           height: 100%;
@@ -462,6 +469,9 @@ export default function CustomerServicesPage() {
           .cs-grid {
             grid-template-columns: repeat(2, 1fr);
           }
+          .cs-card-full {
+            grid-column: span 2;
+          }
           .why-grid {
             grid-template-columns: 1fr;
             gap: 48px;
@@ -473,8 +483,8 @@ export default function CustomerServicesPage() {
           .cs-grid {
             grid-template-columns: 1fr;
           }
-          .cs-card {
-            grid-column: span 1 !important;
+          .cs-card-full {
+            grid-column: span 1;
           }
           .cs-card-inner {
             padding: 24px 20px;
