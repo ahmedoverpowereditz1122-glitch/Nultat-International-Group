@@ -8,7 +8,7 @@ const teamMembers = [
   {
     name: 'Hamad Abbasi',
     position: 'Chairman & Founder',
-    image: '/hamad.jpg',
+    image: '/hamad.JPG',
     bio: 'Visionary leader with extensive experience in business development and customer service excellence.',
     initials: 'HA',
   },
@@ -136,26 +136,44 @@ export default function Team() {
                     {String(index + 1).padStart(2, '0')}
                   </div>
 
-                  {/* Initials circle */}
-                  <div style={{
-                    width: '88px',
-                    height: '88px',
-                    border: '2px solid rgba(96,165,250,0.4)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    position: 'relative',
-                    zIndex: 1,
-                  }}>
-                    <span style={{
-                      fontSize: '28px',
-                      fontWeight: 800,
-                      color: '#ffffff',
-                      letterSpacing: '-0.02em',
+                  {/* Image or fallback initials */}
+                  {member.image ? (
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        position: 'absolute',
+                        inset: 0,
+                        zIndex: 1,
+                      }}
+                      onError={e => {
+                        e.currentTarget.style.display = 'none'
+                      }}
+                    />
+                  ) : (
+                    <div style={{
+                      width: '88px',
+                      height: '88px',
+                      border: '2px solid rgba(96,165,250,0.4)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      position: 'relative',
+                      zIndex: 1,
                     }}>
-                      {member.initials}
-                    </span>
-                  </div>
+                      <span style={{
+                        fontSize: '28px',
+                        fontWeight: 800,
+                        color: '#ffffff',
+                        letterSpacing: '-0.02em',
+                      }}>
+                        {member.initials}
+                      </span>
+                    </div>
+                  )}
 
                   {/* Bottom blue accent bar */}
                   <div style={{
@@ -165,6 +183,7 @@ export default function Team() {
                     right: 0,
                     height: '3px',
                     backgroundColor: '#1e40af',
+                    zIndex: 2,
                   }} />
                 </div>
 
@@ -211,17 +230,17 @@ export default function Team() {
       <SafeStyle>
         {`
         @media (max-width: 900px) {
-            .team-grid {
-                grid-template-columns: repeat(2, 1fr) !important;
-                }
-                }
-                @media (max-width: 560px) {
-                    .team-grid {
-                        grid-template-columns: 1fr !important;
+          .team-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
           }
+        }
+        @media (max-width: 560px) {
+          .team-grid {
+            grid-template-columns: 1fr !important;
           }
-          `}
-  </SafeStyle>
+        }
+        `}
+      </SafeStyle>
     </section>
   )
 }
