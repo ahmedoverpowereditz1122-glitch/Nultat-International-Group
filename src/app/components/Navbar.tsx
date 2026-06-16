@@ -219,7 +219,7 @@ export default function Navbar({ isRealEstateActive = false }: NavbarProps) {
 
             {/* CTA */}
             <Link
-              href="mailto:example@gmail.com"
+              href="mailto:info@nultatinternationalgroup.com"
               style={{
                 backgroundColor: '#1e40af',
                 color: '#ffffff',
