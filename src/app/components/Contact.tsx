@@ -242,7 +242,7 @@ export default function Contact() {
               {/* CTA buttons */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', maxWidth: '280px' }}>
                 <a
-                  href="mailto:info@nullatinternational.com"
+                  href="mailto:info@nultatinternationalgroup.com"
                   style={{
                     display: 'flex',
                     alignItems: 'center',
