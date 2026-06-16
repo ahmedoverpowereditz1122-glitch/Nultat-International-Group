@@ -8,7 +8,7 @@ const teamMembers = [
   {
     name: 'Hamad Abbasi',
     position: 'Chairman & Founder',
-    image: /hamad.jpg',
+    image: /hamad.jpg.JPG',
     bio: 'Visionary leader with extensive experience in business development and customer service excellence.',
     initials: 'HA',
   },
