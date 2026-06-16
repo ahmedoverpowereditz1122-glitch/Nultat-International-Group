@@ -1,7 +1,6 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { FaLinkedin, FaEnvelope } from 'react-icons/fa'
 import SafeStyle from './SafeStyle'
 
 const teamMembers = [
@@ -14,10 +13,17 @@ const teamMembers = [
   },
   {
     name: 'Faraz Khattak',
-    position: 'Director Operation',
+    position: 'Director Operations',
     image: '/faraz.JPG',
     bio: 'Expert in operational management and team leadership with a proven track record across global clients.',
     initials: 'FK',
+  },
+  {
+    name: 'Muhammad Salman',
+    position: 'Manager Administration',
+    image: '/salman.JPG',
+    bio: 'Dedicated administration professional ensuring smooth day-to-day operations and organizational efficiency.',
+    initials: 'MS',
   },
 ]
 
@@ -75,13 +81,13 @@ export default function Team() {
 
         {/* Cards grid */}
         <div
+          className="team-grid"
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(3, 1fr)',
             gap: '2px',
             backgroundColor: '#dbeafe',
           }}
-          className="team-grid"
         >
           {teamMembers.map((member, index) => (
             <motion.div
@@ -101,8 +107,8 @@ export default function Team() {
                 {/* Avatar block */}
                 <div style={{
                   position: 'relative',
-                  height: '260px',
-                  backgroundColor: '#1e3a8a',
+                  height: '300px',
+                  backgroundColor: '#0f1f4d',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -125,11 +131,12 @@ export default function Team() {
                     letterSpacing: '0.16em',
                     color: '#93c5fd',
                     textTransform: 'uppercase',
+                    zIndex: 3,
                   }}>
                     {String(index + 1).padStart(2, '0')}
                   </div>
 
-                  {/* Image or fallback initials */}
+                  {/* Image with contain so full photo is visible */}
                   {member.image ? (
                     <img
                       src={member.image}
@@ -137,10 +144,12 @@ export default function Team() {
                       style={{
                         width: '100%',
                         height: '100%',
-                        objectFit: 'cover',
+                        objectFit: 'contain',
+                        objectPosition: 'center bottom',
                         position: 'absolute',
                         inset: 0,
                         zIndex: 1,
+                        padding: '12px 0 0 0',
                       }}
                       onError={e => {
                         e.currentTarget.style.display = 'none'
@@ -209,7 +218,7 @@ export default function Team() {
                     fontSize: '14px',
                     color: '#64748b',
                     lineHeight: 1.75,
-                    marginBottom: '24px',
+                    marginBottom: '0',
                   }}>
                     {member.bio}
                   </p>
@@ -222,6 +231,10 @@ export default function Team() {
 
       <SafeStyle>
         {`
+        .team-card {
+          background-color: #ffffff;
+          height: 100%;
+        }
         @media (max-width: 900px) {
           .team-grid {
             grid-template-columns: repeat(2, 1fr) !important;
