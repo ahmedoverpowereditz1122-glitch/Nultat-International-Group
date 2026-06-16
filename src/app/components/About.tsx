@@ -83,7 +83,7 @@ export default function About() {
             transition={{ duration: 0.6 }}
             style={{ position: 'relative' }}
           >
-            {/* Gold border frame offset */}
+            {/* Blue border frame offset */}
             <div
               style={{
                 position: 'absolute',
@@ -138,7 +138,7 @@ export default function About() {
                   fontSize: '10px',
                   letterSpacing: '0.18em',
                   textTransform: 'uppercase',
-                  color: '#1e40af',
+                  color: '#93b4e8',
                   fontWeight: 700,
                   marginBottom: '4px',
                 }}
@@ -182,7 +182,7 @@ export default function About() {
               <span style={{ color: '#1e40af' }}>Group</span>
             </h2>
 
-            {/* Gold rule */}
+            {/* Blue rule */}
             <div
               style={{
                 width: '48px',
@@ -200,9 +200,24 @@ export default function About() {
                 marginBottom: '20px',
               }}
             >
-              A results-driven professional services team headquartered in Islamabad, Pakistan.
-              We deliver top-tier customer engagement, sales, and operations support through
-              skilled, highly motivated specialists with proven track records across global markets.
+              Nultat International Group is a highly professional, result-oriented team of
+              professionals based in Islamabad, Pakistan. We provide top-quality customer
+              services through a skilled and motivated team, with each individual having a
+              solid and proven track record in sales and customer services.
+            </p>
+            <p
+              style={{
+                fontSize: '15.5px',
+                lineHeight: 1.8,
+                color: '#444',
+                marginBottom: '20px',
+              }}
+            >
+              We offer a one-window operation for our clients in terms of lead generation,
+              chat support, cold calling, telesales, invoicing, collections, and backend
+              troubleshooting. Our team is a highly motivated and time-tested group of
+              freelancers who have proven track records working with renowned and esteemed
+              clients and organizations.
             </p>
             <p
               style={{
@@ -212,9 +227,12 @@ export default function About() {
                 marginBottom: '36px',
               }}
             >
-              We operate as a single-window partner for our clients — handling lead generation,
-              live chat, cold calling, telesales, invoicing, collections, and backend support
-              around the clock, across all time zones.
+              We understand that every client has particular needs, and we are ready to make
+              the necessary adjustments to satisfy them. Our services are flexible per client
+              requirements. With over 10 years in the business, we are comfortable working
+              with European, Eastern, Pacific, and Central time zones. Nultat International
+              is a group of tech-savvy professionals who can manage extra workload with a
+              smiling face and positive attitude.
             </p>
 
             {/* Capabilities list */}
