@@ -50,6 +50,12 @@ const services = [
     icon: Building2,
     description: 'Working with Keller Williams, Remax, Century 21, Grey Properties, Cosmo International. Expertise in listing & investment appointments.',
   },
+    {
+    id: 'ai-solutions',
+    title: 'AI Solutions & Services',
+    icon: Brain,
+    description: 'Process Automation, Predictive Analytics, AI Chatbots, Machine Learning Integration, Decision Support Systems, Customer Experience Enhancement, Actionable Business Insights',
+  },
 ]
 
 export default function Services() {
