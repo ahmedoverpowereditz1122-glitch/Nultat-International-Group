@@ -19,13 +19,6 @@ const teamMembers = [
     bio: 'Expert in operational management and team leadership with a proven track record across global clients.',
     initials: 'FK',
   },
-  {
-    name: 'M. Umer Farooq',
-    position: 'Web & Android Developer',
-    image: '/images/team/umer.jpg',
-    bio: 'Full-stack developer specializing in modern web and mobile applications built for scale.',
-    initials: 'UF',
-  },
 ]
 
 export default function Team() {
