@@ -44,7 +44,7 @@ const jobOpenings = [
   },
 ]
 
-const APPLY_EMAIL = 'example@gmail.com'
+const APPLY_EMAIL = 'info@nultatinternationalgroup.com'
 
 export default function Careers() {
   return (
