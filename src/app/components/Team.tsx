@@ -25,6 +25,13 @@ const teamMembers = [
     bio: 'Dedicated administration professional ensuring smooth day-to-day operations and organizational efficiency.',
     initials: 'MS',
   },
+  {
+  name: 'Muhammad Sami',
+  position: 'Manager Operations',
+  image: '/sami.JPG',
+  bio: 'Skilled operations professional committed to delivering seamless processes and outstanding service.',
+  initials: 'MS',
+},
 ]
 
 export default function Team() {
