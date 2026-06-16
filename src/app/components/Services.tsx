@@ -51,7 +51,7 @@ const services = [
     icon: Building2,
     description: 'Working with Keller Williams, Remax, Century 21, Grey Properties, Cosmo International. Expertise in listing & investment appointments.',
   },
-    {
+  {
     id: 'ai-solutions',
     title: 'AI Solutions & Services',
     icon: Brain,
@@ -243,14 +243,24 @@ export default function Services() {
 
       <SafeStyle>
         {`
+        .services-grid > div:last-child {
+          grid-column: 2 / span 1;
+        }
+
         @media (max-width: 900px) {
             .services-grid {
                 grid-template-columns: repeat(2, 1fr) !important;
+                }
+            .services-grid > div:last-child {
+                grid-column: 1 / span 2;
                 }
                 }
                 @media (max-width: 560px) {
                     .services-grid {
                         grid-template-columns: 1fr !important;
+                        }
+                    .services-grid > div:last-child {
+                        grid-column: 1;
                         }
                         }
                         `}
