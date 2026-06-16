@@ -120,147 +120,181 @@ export default function Services() {
         }}
           className="services-grid"
         >
-          {services.map((service, index) => (
-            <motion.div
-              key={service.id}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.45, delay: index * 0.08 }}
-              style={{ backgroundColor: '#ffffff', position: 'relative' }}
-            >
-              <Link
-                href={`/services/${service.id}`}
-                style={{ textDecoration: 'none', display: 'block', height: '100%' }}
+          {services.map((service, index) => {
+            const isLast = index === services.length - 1
+
+            return (
+              <motion.div
+                key={service.id}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: index * 0.08 }}
+                style={{
+                  backgroundColor: '#ffffff',
+                  position: 'relative',
+                  gridColumn: isLast ? '1 / -1' : undefined,
+                }}
               >
-                <div
-                  className="service-card"
-                  style={{
-                    padding: '36px 32px',
-                    height: '100%',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    transition: 'background-color 0.2s',
-                    cursor: 'pointer',
-                  }}
-                  onMouseEnter={e => {
-                    (e.currentTarget as HTMLDivElement).style.backgroundColor = '#eff6ff'
-                    const icon = (e.currentTarget as HTMLDivElement).querySelector('.icon-box') as HTMLDivElement
-                    if (icon) icon.style.backgroundColor = '#1e40af'
-                    const iconSvg = icon?.querySelector('svg') as SVGElement
-                    if (iconSvg) iconSvg.style.color = '#ffffff'
-                    const arrow = (e.currentTarget as HTMLDivElement).querySelector('.arrow-link') as HTMLDivElement
-                    if (arrow) arrow.style.gap = '12px'
-                  }}
-                  onMouseLeave={e => {
-                    (e.currentTarget as HTMLDivElement).style.backgroundColor = '#ffffff'
-                    const icon = (e.currentTarget as HTMLDivElement).querySelector('.icon-box') as HTMLDivElement
-                    if (icon) icon.style.backgroundColor = '#dbeafe'
-                    const iconSvg = icon?.querySelector('svg') as SVGElement
-                    if (iconSvg) iconSvg.style.color = '#1e40af'
-                    const arrow = (e.currentTarget as HTMLDivElement).querySelector('.arrow-link') as HTMLDivElement
-                    if (arrow) arrow.style.gap = '8px'
-                  }}
+                <Link
+                  href={`/services/${service.id}`}
+                  style={{ textDecoration: 'none', display: 'block', height: '100%' }}
                 >
-                  {/* Icon */}
                   <div
-                    className="icon-box"
+                    className={`service-card${isLast ? ' service-card-last' : ''}`}
                     style={{
-                      width: '52px',
-                      height: '52px',
-                      backgroundColor: '#dbeafe',
+                      padding: '36px 32px',
+                      height: '100%',
                       display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      marginBottom: '24px',
+                      flexDirection: 'column',
                       transition: 'background-color 0.2s',
-                      flexShrink: 0,
+                      cursor: 'pointer',
+                    }}
+                    onMouseEnter={e => {
+                      (e.currentTarget as HTMLDivElement).style.backgroundColor = '#eff6ff'
+                      const icon = (e.currentTarget as HTMLDivElement).querySelector('.icon-box') as HTMLDivElement
+                      if (icon) icon.style.backgroundColor = '#1e40af'
+                      const iconSvg = icon?.querySelector('svg') as SVGElement
+                      if (iconSvg) iconSvg.style.color = '#ffffff'
+                      const arrow = (e.currentTarget as HTMLDivElement).querySelector('.arrow-link') as HTMLDivElement
+                      if (arrow) arrow.style.gap = '12px'
+                    }}
+                    onMouseLeave={e => {
+                      (e.currentTarget as HTMLDivElement).style.backgroundColor = '#ffffff'
+                      const icon = (e.currentTarget as HTMLDivElement).querySelector('.icon-box') as HTMLDivElement
+                      if (icon) icon.style.backgroundColor = '#dbeafe'
+                      const iconSvg = icon?.querySelector('svg') as SVGElement
+                      if (iconSvg) iconSvg.style.color = '#1e40af'
+                      const arrow = (e.currentTarget as HTMLDivElement).querySelector('.arrow-link') as HTMLDivElement
+                      if (arrow) arrow.style.gap = '8px'
                     }}
                   >
-                    <service.icon
-                      size={22}
-                      style={{ color: '#1e40af', transition: 'color 0.2s' }}
-                    />
+                    {/* Icon */}
+                    <div
+                      className="icon-box"
+                      style={{
+                        width: '52px',
+                        height: '52px',
+                        backgroundColor: '#dbeafe',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        marginBottom: '24px',
+                        transition: 'background-color 0.2s',
+                        flexShrink: 0,
+                      }}
+                    >
+                      <service.icon
+                        size={22}
+                        style={{ color: '#1e40af', transition: 'color 0.2s' }}
+                      />
+                    </div>
+
+                    {/* Text block (kept together so it can sit beside the icon in banner mode) */}
+                    <div className="card-text" style={{ flexGrow: 1 }}>
+                      {/* Index label */}
+                      <div className="index-label" style={{
+                        fontSize: '10px',
+                        fontWeight: 700,
+                        letterSpacing: '0.16em',
+                        textTransform: 'uppercase',
+                        color: '#93c5fd',
+                        marginBottom: '8px',
+                      }}>
+                        {String(index + 1).padStart(2, '0')}
+                      </div>
+
+                      <h3 style={{
+                        fontSize: '18px',
+                        fontWeight: 700,
+                        color: '#1e3a8a',
+                        letterSpacing: '-0.02em',
+                        marginBottom: '12px',
+                        lineHeight: 1.2,
+                      }}>
+                        {service.title}
+                      </h3>
+
+                      <p style={{
+                        fontSize: '14px',
+                        color: '#64748b',
+                        lineHeight: 1.75,
+                        marginBottom: 0,
+                      }}>
+                        {service.description}
+                      </p>
+                    </div>
+
+                    {/* Learn more */}
+                    <div
+                      className="arrow-link"
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        color: '#1e40af',
+                        fontSize: '13px',
+                        fontWeight: 700,
+                        letterSpacing: '0.06em',
+                        textTransform: 'uppercase',
+                        transition: 'gap 0.2s',
+                        marginTop: '24px',
+                        flexShrink: 0,
+                      }}
+                    >
+                      Learn More
+                      <ArrowRight size={14} />
+                    </div>
                   </div>
-
-                  {/* Index label */}
-                  <div style={{
-                    fontSize: '10px',
-                    fontWeight: 700,
-                    letterSpacing: '0.16em',
-                    textTransform: 'uppercase',
-                    color: '#93c5fd',
-                    marginBottom: '8px',
-                  }}>
-                    {String(index + 1).padStart(2, '0')}
-                  </div>
-
-                  <h3 style={{
-                    fontSize: '18px',
-                    fontWeight: 700,
-                    color: '#1e3a8a',
-                    letterSpacing: '-0.02em',
-                    marginBottom: '12px',
-                    lineHeight: 1.2,
-                  }}>
-                    {service.title}
-                  </h3>
-
-                  <p style={{
-                    fontSize: '14px',
-                    color: '#64748b',
-                    lineHeight: 1.75,
-                    flexGrow: 1,
-                    marginBottom: '24px',
-                  }}>
-                    {service.description}
-                  </p>
-
-                  {/* Learn more */}
-                  <div
-                    className="arrow-link"
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '8px',
-                      color: '#1e40af',
-                      fontSize: '13px',
-                      fontWeight: 700,
-                      letterSpacing: '0.06em',
-                      textTransform: 'uppercase',
-                      transition: 'gap 0.2s',
-                    }}
-                  >
-                    Learn More
-                    <ArrowRight size={14} />
-                  </div>
-                </div>
-              </Link>
-            </motion.div>
-          ))}
+                </Link>
+              </motion.div>
+            )
+          })}
         </div>
       </div>
 
       <SafeStyle>
         {`
-        .services-grid > div:last-child {
-          grid-column: 2 / span 1;
+        .service-card-last {
+          flex-direction: row !important;
+          align-items: center !important;
+          gap: 32px;
+        }
+        .service-card-last .icon-box {
+          margin-bottom: 0 !important;
+        }
+        .service-card-last .index-label {
+          display: none;
+        }
+        .service-card-last .arrow-link {
+          margin-top: 0 !important;
+        }
+
+        @media (max-width: 700px) {
+          .service-card-last {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 0;
+          }
+          .service-card-last .icon-box {
+            margin-bottom: 24px !important;
+          }
+          .service-card-last .index-label {
+            display: block;
+          }
+          .service-card-last .arrow-link {
+            margin-top: 24px !important;
+          }
         }
 
         @media (max-width: 900px) {
             .services-grid {
                 grid-template-columns: repeat(2, 1fr) !important;
                 }
-            .services-grid > div:last-child {
-                grid-column: 1 / span 2;
-                }
                 }
                 @media (max-width: 560px) {
                     .services-grid {
                         grid-template-columns: 1fr !important;
-                        }
-                    .services-grid > div:last-child {
-                        grid-column: 1;
                         }
                         }
                         `}
