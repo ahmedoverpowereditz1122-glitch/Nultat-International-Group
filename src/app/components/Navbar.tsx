@@ -21,6 +21,7 @@ const servicesList = [
   { name: 'BPO Services', href: '/services/bpo-services' },
   { name: 'Business Management', href: '/services/business-management' },
   { name: 'Real Estate', href: '/services/real-estate' },
+  { name: 'AI Solutions & Services', href: '/services/ai-solutions'} 
 ]
 
 interface NavbarProps {
