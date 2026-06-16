@@ -99,7 +99,12 @@ const whyUs = [
   'Focus on Measurable Business Outcomes',
 ]
 
+const lastSpan = services.length % 3 === 1 ? 3 : services.length % 3 === 2 ? 2 : 1
+
 export default function AISolutionsPage() {
+
+  const lastSpan = services.length % 3 === 1 ? 3 : services.length % 3 === 2 ? 2 : 1
+
   return (
     <>
       <Navbar />
@@ -249,47 +254,55 @@ export default function AISolutionsPage() {
               </h2>
             </motion.div>
 
-            <div className="cs-grid">
-              {services.map((svc, i) => (
-                <motion.div
-                  key={svc.title}
-                  className="cs-card"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.05 }}
-                >
-                  <div
-                    className="cs-card-inner"
-                    onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#eff6ff')}
-                    onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#ffffff')}
-                  >
-                    <div style={{
-                      width: '48px', height: '48px', backgroundColor: '#dbeafe',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      marginBottom: '20px', flexShrink: 0,
-                    }}>
-                      <svc.icon size={20} style={{ color: '#1e40af' }} />
-                    </div>
-                    <div style={{
-                      fontSize: '10px', fontWeight: 700, letterSpacing: '0.16em',
-                      textTransform: 'uppercase', color: '#93c5fd', marginBottom: '8px',
-                    }}>
-                      {String(i + 1).padStart(2, '0')}
-                    </div>
-                    <h3 style={{
-                      fontSize: '16px', fontWeight: 700, color: '#1e3a8a',
-                      letterSpacing: '-0.01em', lineHeight: 1.25, marginBottom: '10px',
-                    }}>
-                      {svc.title}
-                    </h3>
-                    <p style={{ fontSize: '13.5px', color: '#64748b', lineHeight: 1.75, margin: 0 }}>
-                      {svc.description}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
+<div className="cs-grid">
+  {services.map((svc, i) => {
+    const isLast = i === services.length - 1
+    const spanLast = isLast && lastSpan > 1
+
+    return (
+      <motion.div
+        key={svc.title}
+        className={`cs-card${spanLast ? ' cs-card-last' : ''}`}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.4, delay: i * 0.05 }}
+        style={spanLast ? { gridColumn: `span ${lastSpan}` } : undefined}
+      >
+        <div
+          className={`cs-card-inner${spanLast ? ' cs-card-inner-last' : ''}`}
+          onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#eff6ff')}
+          onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#ffffff')}
+        >
+          <div className="cs-icon" style={{
+            width: '48px', height: '48px', backgroundColor: '#dbeafe',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            marginBottom: '20px', flexShrink: 0,
+          }}>
+            <svc.icon size={20} style={{ color: '#1e40af' }} />
+          </div>
+          <div className="cs-text">
+            <div className="cs-index" style={{
+              fontSize: '10px', fontWeight: 700, letterSpacing: '0.16em',
+              textTransform: 'uppercase', color: '#93c5fd', marginBottom: '8px',
+            }}>
+              {String(i + 1).padStart(2, '0')}
             </div>
+            <h3 style={{
+              fontSize: '16px', fontWeight: 700, color: '#1e3a8a',
+              letterSpacing: '-0.01em', lineHeight: 1.25, marginBottom: '10px',
+            }}>
+              {svc.title}
+            </h3>
+            <p style={{ fontSize: '13.5px', color: '#64748b', lineHeight: 1.75, margin: 0 }}>
+              {svc.description}
+            </p>
+          </div>
+        </div>
+      </motion.div>
+    )
+  })}
+</div>
           </div>
         </section>
 
@@ -467,6 +480,31 @@ export default function AISolutionsPage() {
           background-color: #ffffff;
           box-sizing: border-box;
         }
+        .cs-card-inner-last {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+.cs-card-inner-last .cs-icon {
+  margin-bottom: 0 !important;
+}
+.cs-card-inner-last .cs-index {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .cs-card-inner-last {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+  }
+  .cs-card-inner-last .cs-icon {
+    margin-bottom: 20px !important;
+  }
+  .cs-card-inner-last .cs-index {
+    display: block;
+  }
+}
 
         /* ── INDUSTRIES GRID ── */
         .ind-grid {
