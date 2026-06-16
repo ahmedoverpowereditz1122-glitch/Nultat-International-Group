@@ -92,9 +92,6 @@ const whyUs = [
 ]
 
 export default function MobileWebDevPage() {
-  const cols = 3
-  const remainder = services.length % cols
-
   return (
     <>
       <Navbar />
@@ -244,52 +241,47 @@ export default function MobileWebDevPage() {
               </h2>
             </motion.div>
 
-            <div
-              style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2px', backgroundColor: '#dbeafe' }}
-              className="cs-grid"
-            >
-              {services.map((svc, i) => {
-                const isLast = i === services.length - 1
-                const spanCols = isLast && remainder !== 0 ? cols - remainder + 1 : 1
-                return (
-                  <motion.div
-                    key={svc.title}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: i * 0.05 }}
-                    style={{ backgroundColor: '#ffffff', gridColumn: spanCols > 1 ? `span ${spanCols}` : undefined }}
+            {/* KEY FIX: removed span logic, uniform grid with CSS classes */}
+            <div className="cs-grid">
+              {services.map((svc, i) => (
+                <motion.div
+                  key={svc.title}
+                  className="cs-card"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: i * 0.05 }}
+                >
+                  <div
+                    className="cs-card-inner"
+                    onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#eff6ff')}
+                    onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#ffffff')}
                   >
-                    <div
-                      style={{ padding: '32px 28px', height: '100%', transition: 'background-color 0.2s', cursor: 'default' }}
-                      onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#eff6ff')}
-                      onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#ffffff')}
-                    >
-                      <div style={{
-                        width: '48px', height: '48px', backgroundColor: '#dbeafe',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '20px',
-                      }}>
-                        <svc.icon size={20} style={{ color: '#1e40af' }} />
-                      </div>
-                      <div style={{
-                        fontSize: '10px', fontWeight: 700, letterSpacing: '0.16em',
-                        textTransform: 'uppercase', color: '#93c5fd', marginBottom: '8px',
-                      }}>
-                        {String(i + 1).padStart(2, '0')}
-                      </div>
-                      <h3 style={{
-                        fontSize: '16px', fontWeight: 700, color: '#1e3a8a',
-                        letterSpacing: '-0.01em', lineHeight: 1.25, marginBottom: '10px',
-                      }}>
-                        {svc.title}
-                      </h3>
-                      <p style={{ fontSize: '13.5px', color: '#64748b', lineHeight: 1.75 }}>
-                        {svc.description}
-                      </p>
+                    <div style={{
+                      width: '48px', height: '48px', backgroundColor: '#dbeafe',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      marginBottom: '20px', flexShrink: 0,
+                    }}>
+                      <svc.icon size={20} style={{ color: '#1e40af' }} />
                     </div>
-                  </motion.div>
-                )
-              })}
+                    <div style={{
+                      fontSize: '10px', fontWeight: 700, letterSpacing: '0.16em',
+                      textTransform: 'uppercase', color: '#93c5fd', marginBottom: '8px',
+                    }}>
+                      {String(i + 1).padStart(2, '0')}
+                    </div>
+                    <h3 style={{
+                      fontSize: '16px', fontWeight: 700, color: '#1e3a8a',
+                      letterSpacing: '-0.01em', lineHeight: 1.25, marginBottom: '10px',
+                    }}>
+                      {svc.title}
+                    </h3>
+                    <p style={{ fontSize: '13.5px', color: '#64748b', lineHeight: 1.75, margin: 0 }}>
+                      {svc.description}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </div>
         </section>
@@ -297,7 +289,7 @@ export default function MobileWebDevPage() {
         {/* ── WHY CHOOSE US ── */}
         <section style={{ backgroundColor: '#ffffff', padding: '96px 0' }}>
           <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 32px' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'center' }} className="why-grid">
+            <div className="why-grid">
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -335,17 +327,16 @@ export default function MobileWebDevPage() {
               </motion.div>
 
               <motion.div
+                className="why-cards"
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2px', backgroundColor: '#dbeafe' }}
-                className="why-cards"
               >
                 {whyUs.map((point) => (
                   <div key={point} style={{ backgroundColor: '#f8faff', padding: '24px 20px' }}>
                     <CheckCircle2 size={18} style={{ color: '#1e40af', marginBottom: '10px' }} />
-                    <p style={{ fontSize: '13.5px', fontWeight: 600, color: '#1e3a8a', lineHeight: 1.5 }}>{point}</p>
+                    <p style={{ fontSize: '13.5px', fontWeight: 600, color: '#1e3a8a', lineHeight: 1.5, margin: 0 }}>{point}</p>
                   </div>
                 ))}
               </motion.div>
@@ -361,7 +352,7 @@ export default function MobileWebDevPage() {
           }} />
           <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '3px', backgroundColor: '#1e40af' }} />
           <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 32px', position: 'relative', zIndex: 1 }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '32px' }} className="cta-row">
+            <div className="cta-row">
               <div>
                 <div style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#93c5fd', marginBottom: '12px' }}>
                   Ready to Get Started?
@@ -388,7 +379,6 @@ export default function MobileWebDevPage() {
                 >
                   Contact Us <ArrowRight size={14} />
                 </Link>
-               
               </div>
             </div>
           </div>
@@ -399,15 +389,78 @@ export default function MobileWebDevPage() {
       <Footer />
 
       <style>{`
-        @media (max-width: 900px) {
-          .cs-grid { grid-template-columns: repeat(2, 1fr) !important; }
-          .why-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
-          .why-cards { grid-template-columns: 1fr 1fr !important; }
+        /* ── SERVICES GRID ── */
+        .cs-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 2px;
+          background-color: #dbeafe;
         }
+        .cs-card {
+          background-color: #ffffff;
+        }
+        .cs-card-inner {
+          padding: 32px 28px;
+          height: 100%;
+          transition: background-color 0.2s;
+          cursor: default;
+          background-color: #ffffff;
+          box-sizing: border-box;
+        }
+
+        /* ── WHY CHOOSE US ── */
+        .why-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 80px;
+          align-items: center;
+        }
+        .why-cards {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 2px;
+          background-color: #dbeafe;
+        }
+
+        /* ── CTA ROW ── */
+        .cta-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 32px;
+        }
+
+        /* ── TABLET (≤ 900px) ── */
+        @media (max-width: 900px) {
+          .cs-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+          .why-grid {
+            grid-template-columns: 1fr;
+            gap: 48px;
+          }
+        }
+
+        /* ── MOBILE (≤ 560px) ── */
         @media (max-width: 560px) {
-          .cs-grid { grid-template-columns: 1fr !important; }
-          .why-cards { grid-template-columns: 1fr !important; }
-          .cta-row { flex-direction: column !important; }
+          .cs-grid {
+            grid-template-columns: 1fr;
+            gap: 2px;
+          }
+          .cs-card {
+            grid-column: span 1 !important;
+          }
+          .cs-card-inner {
+            padding: 24px 20px;
+          }
+          .why-cards {
+            grid-template-columns: 1fr;
+          }
+          .cta-row {
+            flex-direction: column;
+            align-items: flex-start;
+          }
         }
       `}</style>
     </>
