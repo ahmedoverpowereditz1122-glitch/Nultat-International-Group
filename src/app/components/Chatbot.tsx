@@ -32,7 +32,7 @@ LEADERSHIP TEAM:
 
 CONTACT INFO:
 - Phone: 0092-330-688 7888
-- Email: info@nullatinternational.com
+- Email: info@nultatinternationalgroup.com
 - Address: AliHasnain Plaza, 3rd Floor, Office #303, Ghouritown Phase 5, Islamabad, Pakistan
 - Hours: Mon–Fri 3pm–2am PKT, Sat–Sun closed
 
