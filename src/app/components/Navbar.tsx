@@ -331,7 +331,7 @@ export default function Navbar({ isRealEstateActive = false }: NavbarProps) {
               </div>
 
               <Link
-                href="mailto:example@gmail.com"
+                href="mailto:info@nultatinternationalgroup.com"
                 onClick={() => setIsOpen(false)}
                 style={{
                   backgroundColor: '#1e40af',
