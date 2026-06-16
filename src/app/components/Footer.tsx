@@ -207,7 +207,7 @@ export default function Footer() {
               <li>
                 <a href="mailto:example@gmail.com" style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', textDecoration: 'none' }}>
                   <MdEmail size={14} style={{ color: '#1e40af', marginTop: '2px', flexShrink: 0 }} />
-                  <span style={{ fontSize: '13px', color: '#64748b', lineHeight: 1.5 }}>info@nullatinternational.com</span>
+                  <span style={{ fontSize: '13px', color: '#64748b', lineHeight: 1.5 }}>example@gmail.com</span>
                 </a>
               </li>
               <li>
